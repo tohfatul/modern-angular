@@ -64,6 +64,21 @@ src/app/
 └── app.routes.ts   # Application routes
 ```
 
+## Deployment
+
+The repository includes a GitHub Actions workflow that automatically builds and deploys the app to GitHub Pages whenever changes are pushed to `main`.
+
+In the GitHub repository:
+
+1. Open **Settings**.
+2. Select **Pages**.
+3. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+4. Push a commit to `main` or run the **Deploy Angular app to GitHub Pages** workflow manually.
+
+After deployment, the app is available at:
+
+`https://tohfatul.github.io/modern-angular/`
+
 ## Author
 
 Created by [Tohfatul](https://github.com/tohfatul).
