@@ -9,6 +9,7 @@ A modern shopping application built with Angular 22, featuring product cards, a 
 - Quantity updates for existing cart items
 - Reactive cart item total using Angular signals
 - Responsive Angular Material toolbar and icons
+- Example typed service for GET, POST, PUT, and DELETE product API requests
 
 ## Tech Stack
 
@@ -59,10 +60,31 @@ src/app/
 ├── cart/           # Cart service and cart item model
 ├── header/         # Application header and cart badge
 ├── hello/          # Example component
-├── products/       # Product model, cards, and product grid
+├── products/       # Product model, cards, grid, and API service
 ├── app.ts          # Root component
 └── app.routes.ts   # Application routes
 ```
+
+## Connecting to a Backend API
+
+`ProductsApiService` demonstrates typed HTTP requests for listing and reading products, creating one, updating one, and deleting one. `provideHttpClient()` is registered in `src/app/app.config.ts`.
+
+Replace the placeholder URL in `src/app/products/products-api.service.ts` with your backend endpoint. The service methods return RxJS `Observable`s; HTTP requests are sent when a caller subscribes (or uses the observable in the template with `async`).
+
+For example, inject the service into a component and load the products:
+
+```ts
+private readonly productsApi = inject(ProductsApiService);
+readonly products$ = this.productsApi.getProducts();
+```
+
+```html
+@for (product of products$ | async; track product.id) {
+  <p>{{ product.name }}</p>
+}
+```
+
+The backend should return product data matching the `Product` interface. Adapt the interface and endpoint paths to match your API's contract. Subscribe to mutation observables such as `createProduct()` and handle their `next` and `error` notifications in the component.
 
 ## Deployment
 

@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CartService } from '../../cart/cart-service';
+// import { ProductsApiService } from '../products-api.service';
 
 @Component({
   imports: [ProductCard, MatIconModule, MatInputModule, FormsModule, MatFormFieldModule],
@@ -41,6 +42,18 @@ export class ProductsGrid {
       originalPrice: 99.99,
     },
   ]);
+
+  // To load products from the backend, uncomment the service import above,
+  // then uncomment this injection and constructor. The hardcoded list above
+  // remains visible until the request succeeds.
+  // private readonly productsApi = inject(ProductsApiService);
+  //
+  // constructor() {
+  //   this.productsApi.getProducts().subscribe({
+  //     next: (products) => this.products.set(products),
+  //     error: (error: unknown) => console.error('Failed to load products', error),
+  //   });
+  // }
 
   protected readonly filteredProducts = computed(() => {
     const term = this.searchTerm().toLocaleLowerCase().trim();
